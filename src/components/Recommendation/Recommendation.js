@@ -11,6 +11,9 @@ export default function Recommendation({ name, youtubeLink, score, id, onUpvote 
   const { upvoteRecommendation, errorUpvotingRecommendation } = useUpvoteRecommendation();
   const { downvoteRecommendation, errorDownvotingRecommendation } = useDownvoteRecommendation();
 
+  const upvoteId = `${name.replace(" ", "_")}Upvote`
+  const downvoteId = `${name.replace(" ", "_")}Downvote`
+
   const handleUpvote = async () => {
     await upvoteRecommendation(id);
     onUpvote();
@@ -36,14 +39,14 @@ export default function Recommendation({ name, youtubeLink, score, id, onUpvote 
 
   return (
     <Container>
-      <Row>{name}</Row>
+      <Row id="recommendationName">{name}</Row>
       <ReactPlayer url={youtubeLink} width="100%" height="100%" />
       <Row>
-        <GoArrowUp size="24px" onClick={handleUpvote} />
+        <GoArrowUp id={upvoteId} size="24px" onClick={handleUpvote} />
         {score}
-        <GoArrowDown size="24px" onClick={handleDownvote} />
+        <GoArrowDown id={downvoteId} size="24px" onClick={handleDownvote} />
       </Row>
-    </Container>
+    </Container>  
   );
 }
 
